@@ -8,6 +8,7 @@
         <link rel="stylesheet" href="{% static 'blog/bootstrap/bootstrap.min.css' %}" media="screen">
 
         <!-- Custom styles for this template -->
+        <script src="https://kit.fontawesome.com/a3fbf73123.js" crossorigin="anonymous"></script>
 <!--        <link rel="stylesheet" href="{% static 'blog/css/blog-post.css' %}" media="screen">-->
     </head>
     <body>
@@ -65,6 +66,23 @@
                     <hr>
                     <!-- Post Content -->
                     <p>{{ post.content }}</p>
+
+                    {% if post.file_upload %}
+                        <a href="{{ post.file_upload.url }}" class="btn btn-outline-dark" role="button">
+                            Download:
+                            {% if post.get_file_ext == 'csv' %}
+                            <i class="fa-solid fa-file-csv"></i>
+                            {% elif post.get_file_ext == 'xlsx' or post.get_file_ext == 'xls' %}
+                            <i class="fa-solid fa-file-excel"></i>
+                            {% elif post.get_file_ext == 'docx' or post.get_file_ext == 'doc' %}
+                            <i class="fas fa-file-word"></i>
+                            {% else %}
+                            <i class="far fa-file"></i>
+                            {% endif %}
+
+                        </a>
+                    {% endif %}
+
                     <!-- Comments Form -->
                     <div class="card my-4">
                         <h5 class="card-header">Leave a Comment:</h5>
