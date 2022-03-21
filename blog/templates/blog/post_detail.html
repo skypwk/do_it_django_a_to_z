@@ -14,6 +14,8 @@
     <body>
         <!-- Navigation -->
         <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+
+
     <div class="container">
       <a class="navbar-brand" href="#">Start Bootstrap</a>
       <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive"
@@ -27,8 +29,13 @@
               <span class="sr-only">(current)</span>
             </a>
           </li>
+
           <li class="nav-item">
-            <a class="nav-link" href="#">About</a>
+            <a class="nav-link" href="#">Blog
+            </a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="#">About Me</a>
           </li>
           <li class="nav-item">
             <a class="nav-link" href="#">Services</a>
@@ -46,56 +53,64 @@
         <div class="container">
             <div class="row">
                 <!-- Post Cotent Column -->
-                <div class="col-lg-8">
+                <div class="col-lg-8" id="main-area">
                     <!-- Title -->
-                    <h1 class="mt-4">{{ post.title }}</h1>
+                    <div id="post-area">
+                        <h1 class="mt-4">{{ post.title }}</h1>
 
-                    <h5 class="text-muted">{{ post.hook_text }}</h5>
+                        <h5 class="text-muted">{{ post.hook_text }}</h5>
 
-                    <!-- Author -->
-                    <p class="lead">
-                        by
-                        <a href="#">작성자명 쓸 위치(개발예정)</a>
-                    </p>
-                    <hr>
-                    <!-- Date/Time -->
-                    <p>Posted on {{ post.created_at }}</p>
-                    <!-- Preview Image -->
-                    {% if post.head_image  %}
-                        <img class="card-img-top" src="{{ post.head_image.url }}" alt="Card image cap">
-                    {% else %}
-                        <img class="card-img-top" src="https://picsum.photos/seed/{{ post.id}}/750/300" alt="Card image cap">
-                    {% endif %}
-                    <hr>
-                    <!-- Post Content -->
-                    <p>{{ post.content }}</p>
+                        <!-- Author -->
+                        <p class="lead">
+                            by
+                            <a href="#">작성자명 쓸 위치(개발예정)</a>
+                        </p>
+                        <hr>
+                        <!-- Date/Time -->
+                        <p>Posted on {{ post.created_at }}</p>
+                        <!-- Preview Image -->
+                        {% if post.head_image  %}
+                            <img class="card-img-top" src="{{ post.head_image.url }}" alt="Card image cap">
+                        {% else %}
+                            <img class="card-img-top" src="https://picsum.photos/seed/{{ post.id}}/750/300" alt="Card image cap">
+                        {% endif %}
+                        <hr>
 
-                    {% if post.file_upload %}
-                        <a href="{{ post.file_upload.url }}" class="btn btn-outline-dark" role="button">
-                            Download:
-                            {% if post.get_file_ext == 'csv' %}
-                            <i class="fa-solid fa-file-csv"></i>
-                            {% elif post.get_file_ext == 'xlsx' or post.get_file_ext == 'xls' %}
-                            <i class="fa-solid fa-file-excel"></i>
-                            {% elif post.get_file_ext == 'docx' or post.get_file_ext == 'doc' %}
-                            <i class="fas fa-file-word"></i>
-                            {% else %}
-                            <i class="far fa-file"></i>
-                            {% endif %}
+                        <!-- Post Content -->
+                        <p>{{ post.content }}</p>
 
-                        </a>
-                    {% endif %}
+                        {% if post.file_upload %}
+                            <a href="{{ post.file_upload.url }}" class="btn btn-outline-dark" role="button">
+                                Download:
+                                {% if post.get_file_ext == 'csv' %}
+                                <i class="fa-solid fa-file-csv"></i>
+                                {% elif post.get_file_ext == 'xlsx' or post.get_file_ext == 'xls' %}
+                                <i class="fa-solid fa-file-excel"></i>
+                                {% elif post.get_file_ext == 'docx' or post.get_file_ext == 'doc' %}
+                                <i class="fas fa-file-word"></i>
+                                {% else %}
+                                <i class="far fa-file"></i>
+                                {% endif %}
+
+                            </a>
+                        {% endif %}
+                    </div>
+
+
+
 
                     <!-- Comments Form -->
-                    <div class="card my-4">
-                        <h5 class="card-header">Leave a Comment:</h5>
-                        <div class="card-body">
-                            <form>
-                                <div class="form-group">
-                                    <textarea class="form-control" rows="3"></textarea>
-                                </div>
-                                <button type="submit" class="btn btn-primary">Submit</button>
-                            </form>
+                    <div id="comments-area">
+                        <div class="card my-4">
+                            <h5 class="card-header">Leave a Comment:</h5>
+                            <div class="card-body">
+                                <form>
+                                    <div class="form-group">
+                                        <textarea class="form-control" rows="3"></textarea>
+                                    </div>
+                                    <button type="submit" class="btn btn-primary">Submit</button>
+                                </form>
+                            </div>
                         </div>
                     </div>
 
