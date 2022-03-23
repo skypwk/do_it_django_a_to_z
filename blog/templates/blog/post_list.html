@@ -4,7 +4,12 @@
 
 {% block main_area %}
                 {% if post_list.exists %}
-                <h1>Blog</h1>
+                <h1>Blog
+                    {% if category %}
+                        <span class="badge badge-secondary">{{ category }}</span>
+                    {% endif %}
+
+                </h1>
                 {% for p in post_list %}
                 <!-- Blog Post -->
                 <div class="card mb-4" id="post-{{p.pk}}">
