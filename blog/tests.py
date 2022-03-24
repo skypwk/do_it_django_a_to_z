@@ -202,6 +202,9 @@ class TestView(TestCase):
         self.assertNotIn(self.post_003.title, main_area.text)
 
 
-
+    def test_tag_page(self):
+       # / blog/tag/hello/
+        response = self.client.get(self.tag_hello.get_absolute_url())
+        self.assertEqual(response.status_code, 200)
 
 
