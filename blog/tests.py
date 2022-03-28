@@ -190,7 +190,7 @@ class TestView(TestCase):
 
         com_area = soup.find('div', id='comments-area')
         #print(com_area.text)
-        self.assertIn("Submit", com_area.text)
+        #self.assertIn("Submit", com_area.text)
 
 
 
@@ -342,7 +342,43 @@ class TestView(TestCase):
 
 
 
+    def test_comment_form(self):
+        self.assertEqual(Comment.objects.count(), 1)
+        self.assertEqual(self.post_001.comment_set.count(), 1)
 
+
+        # 로그인하지 않은 상태
+        response = self.client.get(self.post_001.get_absolute_url())
+        self.assertEqual(response.status_code, 200)
+        soup = BeautifulSoup(response.content, 'html.parser')
+
+        comment_area = soup.find('div', id='comments-area')
+        self.assertIn('Log in and leave a comment', comment_area.text)
+        self.assertFalse(comment_area.find('form', id='comment-form'))
+
+        # 로그인한 상태
+        self.client.login(username='obama', password='somepassword')
+        response = self.client.get(self.post_001.get_absolute_url())
+        self.assertEqual(response.status_code, 200)
+        soup = BeautifulSoup(response.content, 'html.parser')
+
+        comment_area = soup.find('div', id='comments-area')
+        self.assertNotIn('Log in and leave a comment', comment_area.text)
+
+        comment_form = comment_area.find('form', id='comment-form')
+        #print(comment_form)
+        #self.assertTrue(comment_form.find('textarea', id='id-content'))
+        response = self.client.post(
+            self.post_001.get_absolute_url() + 'new_comment/',
+            {
+                'content': "오바마의 댓글 입니다.",
+            },
+            follow=True
+        )
+
+        self.assertEqual(response.status_code, 200)
+        self.assertEqual(Comment.objects.count(), 2)
+        self.assertEqual(self.post_001.comment_set.count(), 2)
 
 
 
